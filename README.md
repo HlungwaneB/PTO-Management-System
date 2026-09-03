@@ -16,21 +16,14 @@ The system aims to improve the current process, which relies on Excel spreadshee
 
 Technologies Used
 
-Flutter
-
-Dart
-
-C#
-
-ASP.NET Core MVC
-
-Supabase
-
-GitHub
-
-Project Structure
-
-Flutter Mobile App
+* Flutter
+* Dart
+* C#
+* ASP.NET Core MVC
+* Supabase
+* GitHub
+* Project Structure
+* Flutter Mobile App
 
 
 
@@ -64,33 +57,20 @@ Project documentation such as the SRS, feasibility study, risk register, diagram
 
 Main Features
 
-User Authentication
-
-Beneficiary Management
-
-Site Management
-
-PTO Creation
-
-PTO Status Management
-
-PTO Expiry Monitoring
-
-PTO Renewal
-
-PTO De-registration
-
-Search
-
-Filtering
-
-Dashboard
-
-Record History
-
-Data Security
-
-Project Scope
+* User Authentication
+* Beneficiary Management
+* Site Management
+* PTO Creation
+* PTO Status Management
+* PTO Expiry Monitoring
+* PTO Renewal
+* PTO De-registration
+* Search
+* Filtering
+* Dashboard
+* Record History
+* Data Security
+* Project Scope
 
 
 
