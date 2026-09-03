@@ -1,8 +1,8 @@
-\# Permission to Occupy (PTO) Management System
+Permission to Occupy (PTO) Management System
 
 
 
-\## Project Description
+Project Description
 
 
 
@@ -14,7 +14,7 @@ The system aims to improve the current process, which relies on Excel spreadshee
 
 
 
-\## Technologies Used
+Technologies Used
 
 
 
@@ -32,35 +32,35 @@ The system aims to improve the current process, which relies on Excel spreadshee
 
 
 
-\## Project Structure
+    Project Structure
 
 
 
-\### Flutter Mobile App
+   Flutter Mobile App
 
 The Flutter application provides mobile access to the PTO management system.
 
 
 
-\### ASP.NET MVC Web Application
+    ASP.NET MVC Web Application
 
 The C# ASP.NET Core MVC application provides the web-based system for authorised municipal officials.
 
 
 
-\### Supabase
+   Supabase
 
 Supabase is used for centralised database storage and management.
 
 
 
-\### Documentation
+  Documentation
 
 Project documentation such as the SRS, feasibility study, risk register, diagrams and stakeholder evidence will be stored in the documentation section of the repository.
 
 
 
-\## Main Features
+  Main Features
 
 
 
@@ -92,7 +92,7 @@ Project documentation such as the SRS, feasibility study, risk register, diagram
 
 
 
-\## Project Scope
+   Project Scope
 
 
 
@@ -104,7 +104,7 @@ The initial prototype does not include the complete Human Settlements process or
 
 
 
-\## Team
+ Team
 
 
 
@@ -112,11 +112,11 @@ This project is being developed as a group academic project.
 
 
 
-\## Project Status
+   Project Status
 
 
 
-\*\*In Development\*\*
+     In Development
 
 
 
