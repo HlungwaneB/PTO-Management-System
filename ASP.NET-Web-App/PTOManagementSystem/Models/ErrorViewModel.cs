@@ -1,4 +1,4 @@
-namespace PTOManagementSystem.Models
+namespace PTO_web_application.Models
 {
     public class ErrorViewModel
     {
