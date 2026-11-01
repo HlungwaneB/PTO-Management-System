@@ -61,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               <h2 style="color: #E87A2D;">PTO Management System</h2>
               <p>Hi there,</p>
               <p>You requested to reset your password. Click the button below to set a new password.</p>
-              <a href="${actionLink}" style="display: inline-block; padding: 12px 24px; background-color: #E87A2D; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0;">Reset Password</a>
+              <a href="$actionLink" style="display: inline-block; padding: 12px 24px; background-color: #E87A2D; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0;">Reset Password</a>
               <p style="color: #888; font-size: 12px;">If you didn't request this, you can safely ignore this email.</p>
             </div>
           ''',
