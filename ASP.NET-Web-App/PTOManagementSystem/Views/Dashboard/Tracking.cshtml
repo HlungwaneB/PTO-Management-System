@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "PTO Tracking";
+    Layout = "_DashboardLayout";
+
+    var status = ViewBag.CurrentStatus as string ?? "Submitted";
+
+    // Logic Order
+    bool step1Done = true;
+    bool step2Done = (status == "Pending" || status == "Verifying" || status == "Approved" || status == "Rejected");
+    bool step3Done = (status == "Verifying" || status == "Approved" || status == "Rejected");
+    bool step4Done = (status == "Approved" || status == "Rejected");
+
+    bool isRejected = (status == "Rejected");
+}
+<div style="padding: 60px 80px 100px 80px; background: #ffffff; min-height: 75vh;">
+
+    <h1 style="font-size: 38px; font-weight: 800; color: #1A1A1A; margin: 0 0 10px 0; letter-spacing: -0.5px;">PTO Tracking</h1>
+    <p style="font-size: 18px; color: #1A1A1A; margin: 0 0 60px 0; font-weight: 500;">Track your application</p>
+
+    <!--  TIMELINE -->
+    <div style="max-width: 1000px; margin: 0 auto 80px auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: center;">
+            <tr>
+                <!--  Application submitted -->
+                <td style="width: 25%; vertical-align: top;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #E53935; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;">
+                        <i class="bi bi-check2"></i>
+                    </div>
+                    <span style="font-size: 16px; font-weight: 500; color: #1A1A1A;">Application submitted</span>
+                </td>
+
+                <!--  Pending -->
+                <td style="width: 25%; vertical-align: top;">
+                    <div style="@(step2Done ? "width: 50px; height: 50px; border-radius: 50%; background-color: #E53935; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;" : "width: 50px; height: 50px; border-radius: 50%; background-color: #c4c4c4; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;")">
+                        <i class="bi bi-check2"></i>
+                    </div>
+                    <span style="font-size: 16px; font-weight: 500; color: #1A1A1A;">Pending</span>
+                </td>
+
+                <!-- Verifying (Always shows a checkmark) -->
+                <td style="width: 25%; vertical-align: top;">
+                    <div style="@(step3Done ? "width: 50px; height: 50px; border-radius: 50%; background-color: #E53935; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;" : "width: 50px; height: 50px; border-radius: 50%; background-color: #c4c4c4; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;")">
+                        <i class="bi bi-check2"></i>
+                    </div>
+                    <span style="font-size: 16px; font-weight: 500; color: #1A1A1A;">Verifying</span>
+                </td>
+
+                <!--Approved / Rejected -->
+                <td style="width: 25%; vertical-align: top;">
+                    <div style="@(step4Done ? (isRejected ? "width: 50px; height: 50px; border-radius: 50%; background-color: #D62828; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;" : "width: 50px; height: 50px; border-radius: 50%; background-color: #2E8B3E; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;") : "width: 50px; height: 50px; border-radius: 50%; background-color: #c4c4c4; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px auto;")">
+                        <i class="bi @(isRejected ? "bi-x-lg" : "bi-check2")"></i>
+                    </div>
+                    <span style="font-size: 16px; font-weight: 500; color: @(isRejected ? "#D62828" : "#1A1A1A");">
+                        @(isRejected ? "Rejected" : "Approved")
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" style="padding: 0 40px;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: -55px; z-index: -1; position: relative;">
+                        <tr>
+                            @if (step4Done)
+                            {
+                                if (isRejected)
+                                {
+                                    <td style="width: 100%; height: 4px; background-color: #D62828;"></td>
+                                }
+                                else
+                                {
+                                    <td style="width: 100%; height: 4px; background-color: #2E8B3E;"></td>
+                                }
+                            }
+                            else if (step3Done)
+                            {
+                                <td style="width: 66.66%; height: 4px; background-color: #E53935;"></td>
+                                <td style="width: 33.34%; height: 4px; background-color: #d1d1d1;"></td>
+                            }
+                            else if (step2Done)
+                            {
+                                <td style="width: 33.33%; height: 4px; background-color: #E53935;"></td>
+                                <td style="width: 66.67%; height: 4px; background-color: #d1d1d1;"></td>
+                            }
+                            else
+                            {
+                                <td style="width: 100%; height: 4px; background-color: #d1d1d1;"></td>
+                            }
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+   
+    <div style="display: flex; justify-content: space-between; max-width: 1000px; margin: 0 auto;">
+        <a href="/Dashboard" style="padding: 10px 30px; background: #a8a8a8; color: white; text-decoration: none; border-radius: 6px; font-size: 18px;">Back</a>
+        <a href="/Dashboard" style="padding: 10px 30px; background: #a8a8a8; color: white; text-decoration: none; border-radius: 6px; font-size: 18px;">Done</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 5000);
+    </script>
+}

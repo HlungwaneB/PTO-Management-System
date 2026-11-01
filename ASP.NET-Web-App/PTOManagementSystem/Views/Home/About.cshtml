@@ -1,0 +1,254 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+    Layout = "_ApplyLayout";
+}
+
+<style>
+    .about-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px 80px 20px;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        color: #1A1A1A;
+    }
+
+    .about-top-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+
+    .about-text-content h2 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .about-text-content p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-start;
+    }
+
+    .btn-orange {
+        background-color: #E87A2D;
+        color: white;
+        padding: 10px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+        .btn-orange:hover {
+            background-color: #d16a20;
+            color: white;
+        }
+
+    .btn-outline {
+        background-color: transparent;
+        color: #1A1A1A;
+        padding: 10px 30px;
+        border-radius: 30px;
+        border: 1.5px solid #1A1A1A;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+        .btn-outline:hover {
+            background-color: #1A1A1A;
+            color: white;
+        }
+
+    .about-image {
+        width: 100%;
+        height: 350px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        object-fit: cover;
+    }
+
+    .about-quote {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 50px 0;
+        line-height: 1.6;
+    }
+
+   
+    .about-bottom-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        background: #f8f9fa;
+        padding: 40px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+    }
+
+    .about-bottom-text h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+
+        .about-bottom-text h3:first-child {
+            margin-top: 0;
+        }
+
+    .about-bottom-text p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    /* Who Can Apply */
+    .who-can-apply h2 {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .who-can-apply ul {
+        list-style-type: none;
+        padding-left: 0;
+        font-size: 16px;
+        line-height: 2;
+    }
+
+        .who-can-apply ul li {
+            position: relative;
+            padding-left: 20px;
+        }
+
+            .who-can-apply ul li::before {
+                content: "•";
+                color: #E87A2D;
+                font-size: 20px;
+                position: absolute;
+                left: 0;
+                top: -2px;
+            }
+
+    
+    @@media (max-width: 768px) {
+        .about-top-section, .about-bottom-section {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 50px; background: white; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000;">
+
+ 
+    <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+        <img src="~/images/logo.png" alt="PTO Logo" style="height: 40px;" onerror="this.src='https://via.placeholder.com/40'" />
+        <span style="font-size: 24px; font-weight: 900; color: #E87A2D; letter-spacing: 1px;">P.T.O</span>
+    </a>
+
+
+    <div style="display: flex; gap: 40px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%);">
+        <a href="/Home/About" style="color: #1A1A1A; font-weight: 500; text-decoration: none; font-size: 16px;">About us</a>
+        <a href="/Home/Index" style="color: #1A1A1A; font-weight: 500; text-decoration: none; font-size: 16px;">Home</a>
+        <a href="contact" style="color: #1A1A1A; font-weight: 500; text-decoration: none; font-size: 16px;">Contact us</a>
+    </div>
+
+
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <a href="/Auth/Login" style="background: #E87A2D; color: white; padding: 10px 30px; border-radius: 30px; font-weight: bold; text-decoration: none; font-size: 15px;">
+            Log in
+        </a>
+    </div>
+
+</header>
+
+
+<main class="about-container">
+
+    <section class="about-top-section">
+        <div class="about-text-content">
+            <h2>About us</h2>
+            <p>
+                We exist to empower the Mangaung community to secure their land. Our digital platform covers all your permit needs from submitting applications to tracking your status in real-time.
+            </p>
+            <div class="btn-group">
+                <a href="/Apply" class="btn-orange">Apply &rarr;</a>
+                <a href="/Track" class="btn-outline">Track Application</a>
+            </div>
+        </div>
+        <div>
+            <img src="~/images/settlement2.jpg" alt="Satellite Map" class="about-image"
+                 onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800';" />
+        </div>
+    </section>
+
+   
+    <section class="about-quote">
+        The system is designed to eliminate long queues. Know more, be more. your land your future
+    </section>
+
+    
+    <section class="about-bottom-section">
+      
+        <div>
+            <img src="~/images/settlement1.jpg" alt="Ground View" class="about-image"
+                 onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800';" />
+        </div>
+
+      
+        <div class="about-bottom-text">
+            <h3>Our purpose</h3>
+            <p>Our purpose is to enable the housing dream of South Africans</p>
+
+            <h3>Our vision</h3>
+            <p>Is to become south Africa most trusted partner in land management</p>
+        </div>
+    </section>
+
+    <!--Who Can Apply Section -->
+    <section class="who-can-apply">
+        <h2>who can apply</h2>
+        <ul>
+            <li>Household income below R3500 per month</li>
+            <li>South African Citizen</li>
+            <li>Must 21 and above</li>
+            <li>First time home owner and first time government subsidy</li>
+        </ul>
+    </section>
+
+</main>
+
+
+<footer class="pto-dash-footer">
+    <div>
+        <h4>Quick links</h4>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/Home/About">About us</a></li>
+            <li><a href="#">Team</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contact us</h4>
+        <p>Call Center: 0551 259 8647</p>
+        <p>Email: support@pto.co.za</p>
+        <p>Physical address:<br />Bram Fischer Building, corner of Nelson Mandela Drive and Markgraaff Street, Bloemfontein, 9301</p>
+    </div>
+    <div class="pto-dash-socials">
+        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+    </div>
+</footer>

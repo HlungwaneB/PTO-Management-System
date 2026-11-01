@@ -1,0 +1,122 @@
+﻿@using PTO_web_application.Models.ViewModels.Apply
+@using PTO_web_application.Models.ViewModels.Dashboard
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_DashboardLayout";
+}
+
+<main class="pto-dash-main">
+
+    <!--ERROR MESSAGE  -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+            <strong>Error:</strong> @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <!--  QUICK ACTIONS -->
+    <div class="pto-dash-actions">
+        <a href="/Dashboard/Tracking" class="pto-action-btn">Track Application</a>
+        <a href="/Renew" class="pto-action-btn">Renew PTO</a>
+    </div>
+
+    <!--  APPLICATION CARD  -->
+    <section class="pto-app-card">
+
+       
+        <div class="pto-app-card-header">
+            <div>
+                <h2>My Application</h2>
+                <p class="pto-app-subtitle">View &amp; Track your Application</p>
+            </div>
+        </div>
+
+        <!-- Card Grid -->
+        <div class="pto-app-grid">
+            
+            <div class="pto-app-tile">
+                <span class="pto-tile-label">Current Site</span>
+                <span class="pto-tile-value">
+                    @(Model.CurrentApplication?.CurrentStatus == "Approved" ? Model.SiteName : "Pending Approval")
+                </span>
+            </div>
+
+            <!-- Lease period -->
+            <div class="pto-app-tile" style="min-height: 160px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span class="pto-tile-label">Lease period</span>
+                    <span class="pto-tile-value" style="font-size: 20px; font-weight: 600; line-height: 1.2; display: block; margin-top: 5px;">
+                        @(Model.CurrentApplication?.CurrentStatus == "Approved" ? Model.LeasePeriod : "Pending Approval")
+                    </span>
+                </div>
+
+                <!--BUTTONS -->
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    @if (Model.CurrentApplication?.CurrentStatus == "Approved")
+                    {
+                        <a href="/Renew" class="pto-btn-renew" style="text-decoration: none; background: #f3dca7; color: #1A1A1A; padding: 8px 24px; border-radius: 6px; font-size: 14px; font-weight: 500;">
+                            renew
+                        </a>
+                    }
+                    else
+                    {
+                        <!-- If not approved, show a disabled button that triggers an alert -->
+                        <button type="button"
+                                onclick="alert('Your application is not approved yet. You cannot renew at this time.');"
+                                class="pto-btn-renew"
+                                style="text-decoration: none; background: #e0e0e0; color: #888; padding: 8px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; border: none; cursor: not-allowed;">
+                            renew
+                        </button>
+                    }
+
+                    <button type="button"
+                            style="background: #f3dca7; color: #1A1A1A; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer;"
+                            onclick="document.getElementById('deleteModal').style.display='block'">
+                        De-register
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Link -->
+        @if (Model.CurrentApplication != null && Model.CurrentApplication.CurrentStatus == "Approved")
+        {
+            <div class="pto-app-download">
+                <a href="/Dashboard/DownloadLeaseAgreement" class="pto-download-link" target="_blank">Download lease agreement</a>
+            </div>
+        }
+
+    </section>
+
+</main>
+
+<!-- DE-REGISTER MODAL -->
+<div id="deleteModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+    <div style="background-color: #fff; margin: 10% auto; padding: 30px; border-radius: 12px; max-width: 400px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+
+        <h3 style="color: #D62828; margin-bottom: 15px;">De-register Application</h3>
+        <p style="font-size: 14px; color: #555; margin-bottom: 20px;">
+            Are you sure you want to delete your application? This action cannot be undone.
+            Please enter your password to confirm.
+        </p>
+
+        <form asp-controller="Dashboard" asp-action="DeleteApplication" method="post">
+            @Html.AntiForgeryToken()
+            <input type="password" name="password" placeholder="Enter your password" required
+                   style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; font-size: 14px;" />
+
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button type="submit" style="background: #D62828; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    Confirm Delete
+                </button>
+                <button type="button" onclick="document.getElementById('deleteModal').style.display='none'"
+                        style="background: #ccc; color: #333; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
