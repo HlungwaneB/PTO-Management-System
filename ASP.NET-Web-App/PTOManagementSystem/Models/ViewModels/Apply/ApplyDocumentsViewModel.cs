@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace PTO_web_application.Models.ViewModels;
+namespace PTO_web_application.Models.ViewModels.Apply;
 
 public class ApplyDocumentsViewModel
 {

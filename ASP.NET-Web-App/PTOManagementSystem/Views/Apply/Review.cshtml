@@ -1,11 +1,12 @@
-@model PTO_web_application.Models.ViewModels.ApplyReviewViewModel
+﻿@using PTO_web_application.Models.ViewModels.Apply
+@model ApplyReviewViewModel
 
 @{
     ViewData["Title"] = "Application Review";
     Layout = "_ApplyLayout";
 }
 
-<!--  HEADER  -->
+<!-- ═══════════ HEADER ═══════════ -->
 <header class="pto-apply-header">
     <div class="pto-apply-brand">
         <span class="pto-brand-my">my</span>
@@ -17,18 +18,18 @@
     </div>
 </header>
 
-<!--  ORANGE SUB-NAV  -->
+<!-- ═══════════ ORANGE SUB-NAV ═══════════ -->
 <nav class="pto-apply-subnav">
     <a href="/Home/Index" class="pto-subnav-link">About us</a>
     <a href="/Apply" class="pto-subnav-link pto-subnav-active">Apply</a>
-    <a href="#" class="pto-subnav-link">Track Application</a>
-    <a href="#contact" class="pto-subnav-link">Contact us</a>
+  
+    <a href="/Home/contact" class="pto-subnav-link">Contact us</a>
 </nav>
 
-<!--  MAIN  -->
+<!-- ═══════════ MAIN ═══════════ -->
 <main class="pto-review-main">
 
-    <!--  ERROR MESSAGE BOX (Shows if database or auth fails) -->
+    <!-- 🟢 ERROR MESSAGE BOX (Shows if database or auth fails) -->
     @if (ViewData["ErrorMessage"] != null)
     {
         <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">

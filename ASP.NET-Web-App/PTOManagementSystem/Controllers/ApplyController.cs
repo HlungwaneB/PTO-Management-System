@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PTO_web_application.Extensions;
 using PTO_web_application.Models.ViewModels;
 using PTO_web_application.Services;
@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using PTO_web_application.Models.ViewModels.Apply;
+using PTO_web_application.Models.ViewModels.Shared;
 
 namespace PTO_web_application.Controllers;
 
@@ -17,7 +19,7 @@ public class ApplyController : Controller
     private readonly Supabase.Client _supabase;
     private readonly IConfiguration _config;
 
-    // Use a static HttpClient for external API calls (best practice)
+    // Use a static HttpClient for external API calls 
     private static readonly HttpClient _httpClient = new HttpClient();
 
     public ApplyController(
@@ -34,7 +36,7 @@ public class ApplyController : Controller
         _config = config;
     }
 
-    // GET: /Apply  → redirect to first step
+    
     [HttpGet]
     public IActionResult Index()
     {
@@ -43,7 +45,7 @@ public class ApplyController : Controller
 
     
     // STEP 1: RELIABLE INFORMATION
-    
+
     [HttpGet]
     public IActionResult Reliable()
     {
@@ -58,14 +60,14 @@ public class ApplyController : Controller
     {
         if (!ModelState.IsValid) return View(model);
 
-        // Rule: Must be over 21
+        //  Must be over 21
         if (model.IsOver21 == "No")
         {
             ModelState.AddModelError("IsOver21", "You must be over 21 years old to apply.");
             return View(model);
         }
 
-        // Default optional fields to "No" if left blank
+    
         if (string.IsNullOrEmpty(model.IsMilitaryVeteran)) model.IsMilitaryVeteran = "No";
         if (string.IsNullOrEmpty(model.IsElderly)) model.IsElderly = "No";
 
@@ -73,9 +75,8 @@ public class ApplyController : Controller
         return RedirectToAction("Personal");
     }
 
-    
-    // STEP 2: PERSONAL INFORMATION
-    
+    // PERSONAL INFORMATION
+   
     [HttpGet]
     public IActionResult Personal()
     {
@@ -103,13 +104,13 @@ public class ApplyController : Controller
 
                 var dobFromId = new DateTime(yearFull, int.Parse(mm), int.Parse(dd)).Date;
 
-                // 1. Check Date of Birth Matches
+                //Check Date of Birth Matches
                 if (model.DateOfBirth.Value.Date != dobFromId)
                 {
                     ModelState.AddModelError("DateOfBirth", $"Date of Birth does not match the ID Number (Expected: {dobFromId:yyyy-MM-dd}).");
                 }
 
-                // 2. Check Gender Matches (Digits 7-10 >= 5000 is Male)
+                //Check Gender Matches
                 string genderSequence = model.IdNumber.Substring(6, 4);
                 int genderNumber = int.Parse(genderSequence);
                 string genderFromId = genderNumber >= 5000 ? "Male" : "Female";
@@ -119,7 +120,7 @@ public class ApplyController : Controller
                     ModelState.AddModelError("Gender", $"Gender does not match the ID Number (ID indicates {genderFromId}).");
                 }
 
-                // 3. Check Age is 21+
+                //Check Age is 21+
                 var today = DateTime.Today;
                 var age = today.Year - dobFromId.Year;
                 if (dobFromId.Date > today.AddYears(-age)) age--;
@@ -141,9 +142,8 @@ public class ApplyController : Controller
         return RedirectToAction("Contact");
     }
 
-    
-    // STEP 3: CONTACT INFORMATION & SITE SELECTION
-    
+    // CONTACT INFORMATION and SITE SELECTION
+  
     [HttpGet]
     public async Task<IActionResult> Contact()
     {
@@ -198,9 +198,8 @@ public class ApplyController : Controller
         }
     }
 
-    
-    // STEP 4: DEPENDENT INFORMATION
-    
+    // DEPENDENT INFORMATION
+   
     [HttpGet]
     public IActionResult Dependent()
     {
@@ -234,8 +233,7 @@ public class ApplyController : Controller
         return RedirectToAction("Documents");
     }
 
-  
-    // STEP 5: DOCUMENTS
+    //DOCUMENTS
     
     [HttpGet]
     public IActionResult Documents()
@@ -296,9 +294,10 @@ public class ApplyController : Controller
 
         return RedirectToAction("CreatePassword");
     }
-    
-    // STEP 6: CREATE PASSWORD
-    
+
+
+    // CREATE PASSWORD
+   
     [HttpGet]
     public IActionResult CreatePassword()
     {
@@ -321,9 +320,8 @@ public class ApplyController : Controller
         return RedirectToAction("Review");
     }
 
-    
+
     // REVIEW
-    
     [HttpGet]
     public IActionResult Review()
     {
@@ -331,7 +329,7 @@ public class ApplyController : Controller
     }
 
     
-    // SUBMIT (Saves to DB, Creates User, Sends SMS & Email, Saves Notification)
+    // SUBMIT Saves to DB, Creates User, Sends SMS & Email, Saves Notification
     
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -354,11 +352,11 @@ public class ApplyController : Controller
 
         try
         {
-            // 1. Create Auth User
+            // Create Auth User
             var authSuccess = await _authService.CreatePasswordAsync(personal.IdNumber, passwordStep.Password);
             if (!authSuccess) throw new Exception("Could not create user. This ID Number might already be registered.");
 
-            // 2. Map to DB Model
+            // Map to DB Model
             var newApplication = new Models.Application
             {
                 IdNumber = personal.IdNumber,
@@ -380,13 +378,12 @@ public class ApplyController : Controller
                 DependentIdUrl = depUrl
             };
 
-            // 3. Save to DB
+            //Save to DB
             var savedApp = await _applicationService.SubmitAsync(newApplication);
             if (savedApp == null) throw new Exception("Failed to insert into the database.");
 
-            //  4. SEND SMS VIA TEXTBEE
            
-            //  5. Create the Notification in the Database
+            //Create the Notification in the Database
             try
             {
                 var currentUser = _supabase.Auth.CurrentUser;
@@ -409,21 +406,31 @@ public class ApplyController : Controller
             }
             catch (Exception ex) { Console.WriteLine($"NOTIFICATION ERROR: {ex.Message}"); }
 
-            // 6. Success Redirect
+            //Success Redirect
             HttpContext.Session.Clear();
             HttpContext.Session.SetString("app_reference", personal.IdNumber);
             return RedirectToAction("Submitted");
         }
         catch (Exception ex)
         {
-            ViewData["ErrorMessage"] = $"Database Error: {ex.Message}";
+            // 🟢 FIX: Clean up the error message so the user doesn't see raw Supabase errors
+            if (ex.Message.Contains("already registered") || ex.Message.Contains("Could not create user"))
+            {
+                ViewData["ErrorMessage"] = "This ID Number is already registered. If you have already applied, please log in to track your application.";
+            }
+            else
+            {
+                ViewData["ErrorMessage"] = "An unexpected error occurred while submitting your application. Please try again.";
+                Console.WriteLine($"Database Error: {ex.Message}"); // Log the real error for debugging
+            }
+
             return View("Review", BuildReviewModel());
         }
     }
 
-    
-    // SUBMITTED (Success Screen)
-    
+  
+    // Application Submitted screen
+
     [HttpGet]
     public IActionResult Submitted()
     {
@@ -434,7 +441,7 @@ public class ApplyController : Controller
         return View(model);
     }
 
-    // Helper method to rebuild the Review model if an error occurs
+    
     private ApplyReviewViewModel BuildReviewModel()
     {
         var personal = HttpContext.Session.GetObject<ApplyPersonalViewModel>("apply_personal");

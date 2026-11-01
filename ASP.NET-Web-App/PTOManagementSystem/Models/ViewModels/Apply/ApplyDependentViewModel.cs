@@ -1,14 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PTO_web_application.Models.ViewModels;
+namespace PTO_web_application.Models.ViewModels.Apply;
 
 public class ApplyDependentViewModel
 {
-    //  NEW: Relationship field
+   
     [Required(ErrorMessage = "Relationship is required")]
     public string Relationship { get; set; } = string.Empty;
 
-    //  RESTORED: Old fields
+    
     [Required(ErrorMessage = "Dependent's Surname is required")]
     public string Surname { get; set; } = string.Empty;
 
