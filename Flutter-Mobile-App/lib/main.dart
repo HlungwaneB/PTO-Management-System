@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pto_mobile/viewmodels/apply_viewmodel.dart';
-import 'package:pto_mobile/viewmodels/renew_viewmodel.dart';
+import 'package:pto_management_system/viewmodels/apply_viewmodel.dart';
+import 'package:pto_management_system/viewmodels/renew_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'viewmodels/login_viewmodel.dart';
 import 'viewmodels/dashboard_viewmodel.dart';
