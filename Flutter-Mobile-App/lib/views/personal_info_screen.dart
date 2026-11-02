@@ -140,7 +140,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     _buildLabel('Title'),
                     DropdownButtonFormField<String>(
                       decoration: InputDecoration(filled: true, fillColor: const Color(0xFFE0E0E0), border: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none), contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
-                      value: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof'].contains(_selectedTitle) ? _selectedTitle : null,
+                      initialValue: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof'].contains(_selectedTitle) ? _selectedTitle : null,
                       hint: const Text('Select Title...'),
                       items: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
                       onChanged: (val) => setState(() => _selectedTitle = val),
