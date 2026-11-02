@@ -1,11 +1,12 @@
-@model PTO_web_application.Models.ViewModels.ApplicationSubmittedViewModel
+﻿@using PTO_web_application.Models.ViewModels.Shared
+@model ApplicationSubmittedViewModel
 
 @{
     ViewData["Title"] = "Application Submitted";
     Layout = "_ApplyLayout";
 }
 
-<!--  HEADER  -->
+<!-- ═══════════ HEADER ═══════════ -->
 <header class="pto-apply-header">
     <div class="pto-apply-brand">
         <span class="pto-brand-my">my</span>
@@ -17,7 +18,7 @@
     </div>
 </header>
 
-<!--  MAIN  -->
+<!-- ═══════════ MAIN ═══════════ -->
 <main class="pto-submitted-main">
 
     <!-- Success card -->
@@ -56,7 +57,7 @@
 
 </main>
 
-<!--  FOOTER  -->
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer class="pto-dash-footer">
     <div>
         <h4>Quick links</h4>

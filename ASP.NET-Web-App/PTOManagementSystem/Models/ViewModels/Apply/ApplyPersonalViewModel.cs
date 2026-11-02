@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PTO_web_application.Models.ViewModels;
+namespace PTO_web_application.Models.ViewModels.Apply;
 
-//  Attribute
+
 [IdNumberDobMatch]
 public class ApplyPersonalViewModel
 {
@@ -28,7 +28,7 @@ public class ApplyPersonalViewModel
     public string Gender { get; set; } = string.Empty;
 }
 
-// The validation class 
+
 public class IdNumberDobMatchAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)

@@ -1,11 +1,12 @@
-@model PTO_web_application.Models.ViewModels.ApplyDocumentsViewModel
+﻿@using PTO_web_application.Models.ViewModels.Apply
+@model ApplyDocumentsViewModel
 
 @{
     ViewData["Title"] = "Apply - Upload Documents";
     Layout = "_ApplyLayout";
 }
 
-<!--  HEADER -->
+<!-- ═══════════ HEADER ═══════════ -->
 <header class="pto-apply-header">
     <div class="pto-apply-brand">
         <span class="pto-brand-my">my</span>
@@ -17,15 +18,15 @@
     </div>
 </header>
 
-<!--  ORANGE SUB-NAV  -->
+<!-- ═══════════ ORANGE SUB-NAV ═══════════ -->
 <nav class="pto-apply-subnav">
     <a href="/Home/Index" class="pto-subnav-link">About us</a>
     <a href="/Apply" class="pto-subnav-link pto-subnav-active">Apply</a>
   
-    <a href="#contact" class="pto-subnav-link">Contact us</a>
+    <a href="/Home/contact" class="pto-subnav-link">Contact us</a>
 </nav>
 
-<!--  MAIN  -->
+<!-- ═══════════ MAIN ═══════════ -->
 <main class="pto-apply-main">
     <div class="pto-apply-card">
 

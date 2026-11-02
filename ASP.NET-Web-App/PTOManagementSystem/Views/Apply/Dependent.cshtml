@@ -1,11 +1,12 @@
-@model PTO_web_application.Models.ViewModels.ApplyDependentViewModel
+﻿@using PTO_web_application.Models.ViewModels.Apply
+@model ApplyDependentViewModel
 
 @{
     ViewData["Title"] = "Apply - Dependent Information";
     Layout = "_ApplyLayout";
 }
 
-<!--  HEADER  -->
+<!-- ═══════════ HEADER ═══════════ -->
 <header class="pto-apply-header">
     <div class="pto-apply-brand">
         <span class="pto-brand-my">my</span>
@@ -17,15 +18,14 @@
     </div>
 </header>
 
-<!--  ORANGE SUB-NAV  -->
+<!-- ═══════════ ORANGE SUB-NAV ═══════════ -->
 <nav class="pto-apply-subnav">
     <a href="/Home/Index" class="pto-subnav-link">About us</a>
     <a href="/Apply" class="pto-subnav-link pto-subnav-active">Apply</a>
-    <a href="#" class="pto-subnav-link">Track Application</a>
-    <a href="#contact" class="pto-subnav-link">Contact us</a>
+    <a href="/Home/contactt" class="pto-subnav-link">Contact us</a>
 </nav>
 
-<!--  MAIN  -->
+<!-- ═══════════ MAIN ═══════════ -->
 <main class="pto-apply-main">
     <div class="pto-apply-card">
 
@@ -41,7 +41,7 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <!--  Relationship Dropdown -->
+            <!-- 🟢 Relationship Dropdown -->
             <div class="pto-apply-row">
                 <label asp-for="Relationship" class="pto-apply-label">Relationship</label>
                 <div class="pto-apply-field">

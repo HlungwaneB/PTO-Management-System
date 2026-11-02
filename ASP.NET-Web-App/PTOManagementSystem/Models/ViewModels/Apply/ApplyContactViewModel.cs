@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace PTO_web_application.Models.ViewModels;
+namespace PTO_web_application.Models.ViewModels.Apply;
 
 public class ApplyContactViewModel
 {
@@ -23,10 +23,10 @@ public class ApplyContactViewModel
     [Required(ErrorMessage = "Please select if you are a dependant")]
     public string IsDependant { get; set; } = string.Empty;
 
-    //  Added for Site Selection
+   
     [Required(ErrorMessage = "Please select a site")]
     public string SelectedSiteId { get; set; } = string.Empty;
 
-    //  Holds the list of sites for the dropdown
+    
     public List<SelectListItem> AvailableSites { get; set; } = new();
 }

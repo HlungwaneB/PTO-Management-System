@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PTO_web_application.Models.ViewModels;
+namespace PTO_web_application.Models.ViewModels.Apply;
 
 public class ApplyReliableViewModel
 {
@@ -19,13 +19,13 @@ public class ApplyReliableViewModel
     [Required(ErrorMessage = "Please select if this is your first time government subsidy")]
     public string IsFirstTimeGovernmentSubsidy { get; set; } = string.Empty;
 
-    //  These two are completely optional. No [Required] tag.
+    
     public string? IsMilitaryVeteran { get; set; }
     public string? IsElderly { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        // 1. Check Age
+        // Check Age
         if (IsOver21 == "No")
         {
             yield return new ValidationResult(
@@ -33,7 +33,7 @@ public class ApplyReliableViewModel
                 new[] { nameof(IsOver21) });
         }
 
-        // 2. Check Income is a valid number
+        //Income is a valid number
         if (!decimal.TryParse(MonthlyIncome, out decimal income))
         {
             yield return new ValidationResult(

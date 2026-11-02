@@ -1,4 +1,5 @@
-@model PTO_web_application.Models.ViewModels.ApplyContactViewModel
+﻿@using PTO_web_application.Models.ViewModels.Apply
+@model ApplyContactViewModel
 
 @{
     ViewData["Title"] = "Apply - Contact Information";
@@ -20,7 +21,7 @@
     <a href="#about" class="pto-subnav-link">About us</a>
     <a href="/Apply" class="pto-subnav-link pto-subnav-active">Apply</a>
    
-    <a href="#contact" class="pto-subnav-link">Contact us</a>
+    <a href="/Home/contact" class="pto-subnav-link">Contact us</a>
 </nav>
 
 <main class="pto-apply-main">
@@ -34,7 +35,7 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <!--  SITE SELECTION DROPDOWN -->
+            <!-- 🟢 SITE SELECTION DROPDOWN -->
             <div class="pto-apply-row">
                 <label asp-for="SelectedSiteId" class="pto-apply-label">Select Site *</label>
                 <div class="pto-apply-field">

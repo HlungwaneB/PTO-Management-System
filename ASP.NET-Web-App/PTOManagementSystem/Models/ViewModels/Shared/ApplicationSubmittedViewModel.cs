@@ -1,4 +1,4 @@
-namespace PTO_web_application.Models.ViewModels;
+﻿namespace PTO_web_application.Models.ViewModels.Shared;
 
 public class ApplicationSubmittedViewModel
 {

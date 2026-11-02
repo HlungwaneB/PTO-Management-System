@@ -45,7 +45,7 @@ public class Application : BaseModel
     [Column("is_active")]
     public bool IsActive { get; set; } = true;
 
-  
+   
     [Column("certified_id_url")]
     public string? CertifiedIdUrl { get; set; }
 

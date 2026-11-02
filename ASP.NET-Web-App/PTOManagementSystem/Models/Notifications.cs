@@ -18,7 +18,7 @@ public class Notification : BaseModel
     [Column("message")]
     public string Message { get; set; } = string.Empty;
 
-
+    
     [Column("sent_at")]
     public DateTime SentAt { get; set; }
 
